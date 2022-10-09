@@ -24,7 +24,7 @@ int main(int argc, char* args[])
                 gameRunning = false;
         }
     }
-
+    // Here we add a comment to test gitlens
     window.cleanUp();
     SDL_Quit();
 
