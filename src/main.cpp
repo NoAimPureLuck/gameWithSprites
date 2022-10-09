@@ -1,7 +1,9 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <iostream>
+
 #include "RenderWindow.hpp"
+#include "Entity.hpp"
 
 int main(int argc, char* args[])
 {
@@ -13,6 +15,8 @@ int main(int argc, char* args[])
 
     RenderWindow window("GAME v1.0", 500, 300);
 
+    SDL_Texture* grassTexture = window.loadTexture("res/gfx/grass.png");
+
     bool gameRunning = true;
     SDL_Event event;
 
@@ -23,7 +27,10 @@ int main(int argc, char* args[])
             if (event.type == SDL_QUIT)
                 gameRunning = false;
         }
-    }
+        window.clear();
+        window.render(grassTexture);
+        window.display();
+    }   
     // Here we add a comment to test gitlens
     window.cleanUp();
     SDL_Quit();
