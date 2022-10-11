@@ -25,16 +25,17 @@ int main(int argc, char* args[])
 	std::vector<Entity> entitiees;
 	// Function to render grass floor
 	SDL_Texture* grassTexture = window.loadTexture("res/gfx/ground_grass_1.png");
-	entitiees.push_back(Entity(Vector2f(256, Height - 64), grassTexture));
+	entitiees.push_back(Entity(Vector2f(256, Height - 64), grassTexture, 1));
 	for (int i = 0; i <= Width; i += 32)
 	{
-		entitiees.push_back(Entity(Vector2f(i, Height - 32), grassTexture));
+		entitiees.push_back(Entity(Vector2f(i, Height - 32), grassTexture, 0));
 	}
 	bool gameRunning = true;
 
 	// Player
 	SDL_Texture* playerTexture = window.loadTexture("res/gfx/player.png");
-	Entity player(Vector2f(0, 0), playerTexture);
+	Entity player(Vector2f(0, 0), playerTexture, 0);
+	player.changeID(1);
 	// Make a way to move the player in the player function
 	SDL_Event event;
 
@@ -51,9 +52,11 @@ int main(int argc, char* args[])
         const Uint8* keystates = SDL_GetKeyboardState(NULL);
 		if(keystates[SDL_SCANCODE_A]) {
             player.updatePos(Vector2f(player.getPos().x - 0.3, player.getPos().y));
+			// player.changeID(0);
         }
         if(keystates[SDL_SCANCODE_D]) {
             player.updatePos(Vector2f(player.getPos().x + 0.3, player.getPos().y));
+			// player.changeID(1);
         }
 		if (player.getPos().y > Height - 64)
 		{
@@ -80,6 +83,10 @@ int main(int argc, char* args[])
 	return 0;
 }
 
+// Fix missing pixels on grass
 // Collition with entitiees
 // Jump
-// Fix missing pixels on grass
+// Make new header file with blocks and one with entities
+// animated player
+// texture atlas
+// camera follow the player
